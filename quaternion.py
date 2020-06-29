@@ -1,6 +1,6 @@
 import math
 
-class quaternion:
+class Quaternion:
 
     def __init__(self, r, i, j, k):
         # real and the 3 imaginary components, i, j, and k
@@ -14,7 +14,7 @@ class quaternion:
     def conjugate(q):
         # derived from inverting the signs of the imaginary components
         # denoted by q*
-        return quaternion(q.r, -q.i, -q.j, -q.k)
+        return Quaternion(q.r, -q.i, -q.j, -q.k)
 
     @staticmethod
     def norm(q):
@@ -29,27 +29,27 @@ class quaternion:
         i = q1.r*q2.i + q1.i*q2.r + q1.j*q2.k - q1.k*q2.j
         j = q1.r*q2.j - q1.i*q2.k + q1.j*q2.r + q1.k*q2.i
         k = q1.r*q2.k + q1.i*q2.j - q1.j*q2.i + q1.k*q2.r
-        return quaternion(r,i,j,k)
+        return Quaternion(r,i,j,k)
    
     @staticmethod
     def unit(q):
         # unit quaternion of q, derived from dividing the components by the norm
-        n = quaternion.norm(q)
-        return quaternion(q.r/n, q.i/n, q.j/n, q.k/n)
+        n = Quaternion.norm(q)
+        return Quaternion(q.r/n, q.i/n, q.j/n, q.k/n)
 
     @staticmethod
     def reciprocal(q):
         # the multiplicative inverse of a quaternion (q times q^-1 yields 1), 
         # = q*/norm(q)^2
         # qq* = q.r^2 + q.i^2 + q.j^2 + q.k^2 = norm(q)^2
-        c = quaternion.conjugate(q)
+        c = Quaternion.conjugate(q)
         nsq = q.r**2 + q.i**2 + q.j**2 + q.k**2
-        return quaternion(c.r/nsq, c.i/nsq, c.j/nsq, c.k/nsq)
+        return Quaternion(c.r/nsq, c.i/nsq, c.j/nsq, c.k/nsq)
 
     def conjugation_by(self, q):
         # defined by qpq^-1 as per wikipedia
-        recipq = quaternion.reciprocal(q)
-        return quaternion.multiply(quaternion.multiply(q, self), recipq)
+        recipq = Quaternion.reciprocal(q)
+        return Quaternion.multiply(Quaternion.multiply(q, self), recipq)
    
     def __repr__(self):
         return f"{self.r} + {self.i}i + {self.j}j + {self.k}k"
@@ -63,9 +63,9 @@ def rotate(pos, rot_about, theta):
     # ***also try molecular-matters' faster quaternion vector multiplication
 
     # quaternion rotation identity
-    posq = quaternion(0, pos[0], pos[1], pos[2])
+    posq = Quaternion(0, pos[0], pos[1], pos[2])
     s = math.sin(theta/2)
-    cis = quaternion(math.cos(theta/2), s*rot_about[0], s*rot_about[1], s*rot_about[2])
+    cis = Quaternion(math.cos(theta/2), s*rot_about[0], s*rot_about[1], s*rot_about[2])
     c = posq.conjugation_by(cis)
     x = c.i
     y = c.j
