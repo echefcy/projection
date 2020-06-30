@@ -1,3 +1,4 @@
+![demo.gif](demo.gif)  
 # 3D_proj
 Python 3D projection    
 matrix.py contains some needed matrix and column vector operations  
