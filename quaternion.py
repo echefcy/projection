@@ -55,8 +55,8 @@ class Quaternion:
         return f"{self.r} + {self.i}i + {self.j}j + {self.k}k"
 
 def rotate(pos, rot_about, theta):
-    """pos = position vector
-    rot_about = unit vector to rotate pos about
+    """pos = position vector (row)
+    rot_about = unit vector (row) to rotate pos about
     theta = radians to rotate about"""
     # ***issue: breaks if rot_about isn't a unit vec
     #    potential solution: normalize rot_about
