@@ -1,4 +1,4 @@
-# 3D_proj
+# Projection
 A minimalist Python-based 3D projection library  
 To run the demo, first install <a href="python.org">Python 3.6+</a>, then install <a href="https://arcade.academy/installation.html">Arcade</a>.  
 matrix.py handles matrix operations  
